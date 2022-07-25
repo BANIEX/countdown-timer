@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const nodemailer = require('nodemailer');
 // OLABANJI
 
 
@@ -13,9 +14,19 @@ var countdownRouter = require('./routes/countdown');
 
 var app = express();
 
+
+
+
+
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+
+
+
+
 
 app.use(logger('dev'));   
 app.use(express.json());
@@ -26,7 +37,46 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 // OLABANJI
-app.use('/countdown',countdownRouter)
+app.use('/countdown',countdownRouter);
+
+
+
+
+
+
+// BANIEX
+app.post('/current-time',  function(request,response){
+  let timeOfInitiation = request.body.timeOfInitiation;
+  let timeToEnd = request.body.timeToEnd;
+  let serverTime = new Date().toLocaleTimeString();
+
+  function checktime(){
+    let serverTimeNow = new Date().toLocaleTimeString();
+
+    if(serverTimeNow == timeToEnd){
+      
+
+    }
+  }
+
+
+
+
+  console.log(timeOfInitiation, timeToEnd, serverTime);
+
+
+  response.send({
+    message: "user is invalid",
+    code: "invalid-user",
+    data: null
+
+  });
+})
+
+
+
+
+
 
 
 
